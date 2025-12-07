@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+
+# Data - download from google drive
+data/
+
+# Logs and reports
+logs/
+docs/
+
+# Claude settings
+.claude/
+
+# Environment variables
+.env
+
+# Virtual environment
+venv/
+
+# Archive - depricated files
+archive/
+

@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    container_name: graphrag-api
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/
+      - MONGODB_DATABASE=graphrag_course_db
+      - OLLAMA_HOST=http://ollama:11434
+    volumes:
+      - ./data:/app/data:ro  # Mount data directory for access to exported files
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    networks:
+      - graphrag-network
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:7.0
+    container_name: graphrag-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - graphrag-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: graphrag-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    networks:
+      - graphrag-network
+    restart: unless-stopped
+
+networks:
+  graphrag-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  ollama_models:

@@ -1,0 +1,97 @@
+# ============================================================================
+# AI Course Tutor "Erica" - Requirements (Phases I, II, III)
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Phase I: Data Acquisition (Web Scraping)
+# ----------------------------------------------------------------------------
+
+# Web scraping
+requests==2.31.0
+beautifulsoup4==4.12.3
+lxml==5.1.0
+
+# Content processing
+markdownify==0.12.1
+youtube-transcript-api==0.6.2  # Note: Currently blocked by YouTube
+pypdf==4.0.1
+
+# ----------------------------------------------------------------------------
+# Phase II: Entity Extraction and GraphRAG Construction
+# ----------------------------------------------------------------------------
+
+# Modal.com for serverless GPU processing
+modal>=0.63.0
+
+# MongoDB for graph storage
+pymongo>=4.6.1
+motor>=3.3.2  # Async MongoDB driver
+
+# Text processing and tokenization
+tiktoken>=0.6.0  # Accurate token counting (GPT-4/Qwen compatible)
+
+# LLM and ML (for Modal)
+transformers>=4.40.0
+torch>=2.2.0
+accelerate>=0.28.0
+sentencepiece>=0.2.0
+protobuf>=4.25.0
+bitsandbytes>=0.42.0  # For 8-bit quantization
+
+# Embeddings
+sentence-transformers>=2.5.1
+einops>=0.7.0  # Tensor operations for transformers
+
+# Graph libraries
+networkx>=3.2.1
+python-louvain>=0.16  # Community detection (Louvain algorithm)
+leidenalg>=0.10.2  # Leiden algorithm (better than Louvain)
+igraph>=0.11.3  # Required by leidenalg
+
+# Data processing
+numpy>=1.26.0
+pandas>=2.2.0
+
+# Data validation
+pydantic>=2.6.0
+
+# Testing
+pytest>=8.0.0
+
+# ----------------------------------------------------------------------------
+# Phase III: Query System and Answer Generation
+# ----------------------------------------------------------------------------
+
+# API server
+fastapi>=0.109.0
+uvicorn>=0.27.0
+httpx>=0.26.0
+
+# Ollama is installed separately (via Docker or local install)
+
+# ----------------------------------------------------------------------------
+# Shared Utilities (All Phases)
+# ----------------------------------------------------------------------------
+
+# Progress and logging
+tqdm>=4.66.1
+
+# Configuration
+python-dotenv>=1.0.1
+
+# ----------------------------------------------------------------------------
+# Frontend (Chat Interface)
+# ----------------------------------------------------------------------------
+
+# Gradio for chat UI
+gradio>=4.0.0
+
+# ----------------------------------------------------------------------------
+# Development and Analysis Tools (Optional)
+# ----------------------------------------------------------------------------
+
+# Jupyter for analysis
+jupyterlab>=4.0.0
+ipywidgets>=8.1.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
