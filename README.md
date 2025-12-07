@@ -237,9 +237,7 @@ Each response includes the knowledge graph nodes used and citations to source ma
 ```
 AI_final_project/
 ├── data/                              # All data files
-│   ├── course_data.json               # Raw scraped data (33 MB)
-│   ├── chunks_filtered.json           # Processed chunks (29 MB)
-│   ├── extracted_entities.json        # Raw entities (13 MB)
+│   ├── course_data.json               # Raw scraped data (33 MB) - gitignored
 │   └── mongodb_export/                # Docker deployment data (~451 MB)
 │       ├── text_chunks.json
 │       ├── graph_nodes.json
