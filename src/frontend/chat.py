@@ -114,12 +114,18 @@ def create_chat_interface(api_base_url: str = "http://localhost:8000"):
                     # Format response with citations
                     formatted = answer
 
-                    # Add citations section if available
+                    # Add citations section if available (deduplicated by URL)
                     if citations:
                         formatted += "\n\n---\n**📚 Sources:**\n"
+                        seen_urls = set()
                         for cite in citations:
                             title = cite.get('title', 'Unknown')
                             url = cite.get('url', '')
+                            # Skip duplicates based on URL (or title if no URL)
+                            dedup_key = url if url else title
+                            if dedup_key in seen_urls:
+                                continue
+                            seen_urls.add(dedup_key)
                             if url:
                                 formatted += f"- [{title}]({url})\n"
                             else:
@@ -127,9 +133,7 @@ def create_chat_interface(api_base_url: str = "http://localhost:8000"):
 
                     # Add entities used
                     if entities:
-                        formatted += f"\n**🔗 Concepts used:** {', '.join(entities[:5])}"
-                        if len(entities) > 5:
-                            formatted += f" (+{len(entities) - 5} more)"
+                        formatted += f"\n**🔗 Concepts used:** {', '.join(entities)}"
 
                     # Add timing info
                     if latency_ms:
